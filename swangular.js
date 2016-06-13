@@ -6,8 +6,8 @@
         throw "Please make sure Sweet Alert 2 is included! https://github.com/limonte/sweetalert2";
     }
 
-angular.module('Swangular', [])
-    .factory('Swangular', ['$compile', ('$http'), function($compile, $http) {
+angular.module('swangular', [])
+    .factory('swangular', ['$compile', ('$http'), function($compile, $http) {
 
         /*
          *
