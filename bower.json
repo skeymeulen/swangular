@@ -4,7 +4,7 @@
     "Sander Keymeulen <sander.keymeulen@cloudalize.com>"
   ],
   "description": "An AngularJS wrapper for Sweet Alert 2",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "swangular.js",
   "moduleType": [],
   "keywords": [
