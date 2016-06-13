@@ -1,0 +1,26 @@
+{
+  "name": "swangular",
+  "version": "1.0.0",
+  "description": "An AngularJS wrapper for Sweet Alert 2",
+  "main": "swangular.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skeymeulen/swangular.git"
+  },
+  "keywords": [
+    "sweetalert",
+    "angular",
+    "modal",
+    "sweet",
+    "alert"
+  ],
+  "author": "Sander Keymeulen <sander.keymeulen@cloudalize.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skeymeulen/swangular/issues"
+  },
+  "homepage": "https://github.com/skeymeulen/swangular#readme"
+}
