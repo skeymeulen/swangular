@@ -7,7 +7,7 @@
     }
 
 angular.module('swangular', [])
-    .factory('swangular', ['$compile', ('$http'), function($compile, $http) {
+    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', function($compile, $http, $rootScope, $q) {
 
         /*
          *
@@ -80,23 +80,60 @@ angular.module('swangular', [])
          */
         function swal_html(options){
 
-            if(options.templateHtml) {
+            return _getHtml(options).then(function(html){
+                if(options.scope) {
 
-                return getTemplate(options.templateHtml).then(function(html) {
                     options.html = $compile(html)(options.scope);
-                    return swal(options);
-                })
 
-            }
-            else {
+                } else if(options.controller){
 
-                if(options.html && options.scope){
-                    options.html = $compile(options.html)(options.scope);
+                    options.html = $compile(_wrapHtmlInController(options))($rootScope);
+
                 }
 
                 return swal(options);
+
+            });
+
+        }
+
+        function _wrapHtmlInController(options){
+
+            var controllerString = 'ng-controller="' + options.controller;
+
+            if(options.controllerAs){
+
+                controllerString = controllerString.concat(' as ' + options.controllerAs);
+
             }
 
+            return '<div ' + controllerString + '">' + html + '</div>';
+
+        }
+
+        function _getHtml(options){
+
+            var deferred = $q.defer();
+
+            if(options.templateHtml) {
+
+                _getTemplate(options.templateHtml).then(function(htmlTemplate) {
+                    deferred.resolve(htmlTemplate)
+                })
+
+            } else {
+                deferred.resolve(options.html);
+            }
+
+            return deferred.promise;
+
+        }
+
+        function _getTemplate(tmpl) {
+            return $http.get(tmpl).then(function(res) {
+                console.log(res.data);
+                return res.data || '';
+            });
         }
 
         /*
@@ -122,14 +159,7 @@ angular.module('swangular', [])
                 return swal(arg1, arg2, arg3);
             }
         }
-
-
-        function getTemplate(tmpl) {
-            return $http.get(tmpl).then(function(res) {
-                console.log(res.data);
-                return res.data || '';
-            });
-        }
+        
 
         return {
             alert: swal_alert,
