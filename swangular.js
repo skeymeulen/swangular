@@ -87,7 +87,7 @@ angular.module('swangular', [])
 
                 } else if(options.controller){
 
-                    options.html = $compile(_wrapHtmlInController(options))($rootScope);
+                    options.html = $compile(_wrapHtmlInController(options, html))($rootScope);
 
                 }
 
@@ -97,7 +97,7 @@ angular.module('swangular', [])
 
         }
 
-        function _wrapHtmlInController(options){
+        function _wrapHtmlInController(options, html){
 
             var controllerString = 'ng-controller="' + options.controller;
 
