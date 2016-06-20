@@ -87,7 +87,16 @@ angular.module('swangular', [])
 
                 } else if(options.controller){
 
-                    options.html = $compile(_wrapHtmlInController(options, html))($rootScope);
+                    var scope = $rootScope.$new();
+                    var compiledElement = $compile(_wrapHtmlInController(options, html))(scope);
+                    
+                    if(typeof options.preConfirm === 'string'){
+                        
+                        var controllerInstance = compiledElement.controller();
+                        options.preConfirm = controllerInstance[options.preConfirm];
+                    }
+
+                    options.html = compiledElement;
 
                 }
 
@@ -131,7 +140,7 @@ angular.module('swangular', [])
 
         function _getTemplate(tmpl) {
             return $http.get(tmpl).then(function(res) {
-                console.log(res.data);
+                //console.log(res.data);
                 return res.data || '';
             });
         }
