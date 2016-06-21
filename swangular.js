@@ -78,7 +78,7 @@ angular.module('swangular', [])
          *         .then(function() { console.log("Done"); })
          *
          */
-        function swal_html(options){
+        function swal_open(options){
 
             return _getHtml(options).then(function(html){
                 if(options.scope) {
@@ -175,7 +175,7 @@ angular.module('swangular', [])
             confirm: swal_confirm,
             info: swal_info,
             success: swal_success,
-            html: swal_html,
+            open: swal_open,
             swal: swal_base
         }
 
