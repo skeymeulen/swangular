@@ -2,11 +2,13 @@
 [![Latest Stable Version](https://img.shields.io/bower/v/ng-sweet-alert.svg?style=flat-square)](http://bower.io/search/?q=ng-sweet-alert)
 [![Latest Stable Version](https://img.shields.io/npm/v/ng-sweet-alert.svg?style=flat-square)](https://www.npmjs.com/package/ng-sweet-alert)
 
-# swangular
+swangular
+======
 
-An AngularJS wrapper for Sweet Alert 2 with some added functionality like binding to scope/controller, using html templates...
+An AngularJS wrapper for [SweetAlert2](https://github.com/limonte/sweetalert2) with some added functionality like binding to scope/controller, using html templates...
 
-## Getting Started
+Getting Started
+-------
 
 The easiest way to install is via bower:
 
@@ -32,15 +34,15 @@ app.controller('MainCtrl', function ($scope, swangular) {
 });
 ```
 
-## API
+API
+-------
 
 The swangular service exposes a number of methods for you to use. Below you can find a list of all the exposed methods:
 
-===
+``.swal(options)``
+-------
 
-### ``.swal(options)``
-
-This method maps directly to Sweet Alert 2, and thus has all the same options.
+This method maps directly to SweetAlert2, and thus has all the same options. Nothing new here.
 
 ```javascript
 swangular.swal({   
@@ -50,4 +52,75 @@ swangular.swal({
   showCancelButton: true,
   confirmButtonText: 'Hell, yeah!' });
 ```
+
+``.success(message, [customOptions])``
+-------
+
+Will create a success message with a default `title` 'Success', and default `type` 'success'. You can overwrite/add to these options with the optional `customOptions` parameter.
+
+```javascript
+swangular.success("Great job!");
+```
+
+``.confirm(message, [customOptions])``
+-------
+
+Will create a confirm message with a default `title` 'Alert', default `type` 'warning' and a cancel button. You can overwrite/add to these options with the optional `customOptions` parameter.
+
+```javascript
+swangular.confirm("Are you sure you want to take the red pill?");
+```
+
+``.alert(message, [customOptions])``
+-------
+
+Will create an alert message with a default `title` 'Alert', and default `type` 'warning'. You can overwrite/add to these options with the optional `customOptions` parameter.
+
+```javascript
+swangular.alert("Look out, I'm about to close!", {timer: 2000});
+```
+
+``.info(message, [customOptions])``
+-------
+
+Will create an info message with a default `title` 'Info', and default `type` 'info'. You can overwrite/add to these options with the optional `customOptions` parameter.
+
+```javascript
+swangular.info("My info message", {title: "My custom information title!"});
+```
+
+``.open(options)``
+-------
+
+Will open a SweetAlert2 alert with some Angular sugar on top. You can still use all SweetAlert2 options, but there are a number of Angular specific options added. This allows for binding to scope/controller, using html-templates and more.
+
+```javascript
+swangular.open({
+        title: "New user",
+        templateHtml: "/components/new-user/new_user.html",
+        showCancelButton: true,
+        preConfirm: "submit",
+        showLoaderOnConfirm: true,
+        controller: 'NewUserCtrl',
+        controllerAs: 'vm'
+    });
+```
+
+#### Options:
+
+All the options below are unique to Swangular or have added functionality compared to SweetAlert2. Besides these options, you can still use all standard SweetAlert2 options.
+
+| Argument         | Type    | Description
+| ---------------- | ------- | ------------- 
+| html             | `string`| This can be use in the same way as SweetAlert2 `html`. Additionally, if a `scope` or `controller` options are passed, this html will be compiled and the markup will be bound to that particular scope/controller.
+| htmlTemplate     | `string`| Has the same function as `html`, but here you can pass a path to an external template.
+| scope            | `Object`| Any passed html will be compiled and bound to this scope.  
+| controller       | `string`| Any passed html will be compiled and bound to this controller. If `scope` is present, it will use that and `controller` will be ignored.  
+| controllerAs     | `string`| If you use controllerAs syntax in your markup, you can pass the correct string here.
+| preConfirm       | `string` or `function()`| When a function, it will behave just like in SweetAlert2. When a string is passed, it will use this string to look for a function on the passed `controller`. You have to make sure there is a function with the specified name on that controller.
+
+
+
+
+
 
