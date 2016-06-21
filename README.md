@@ -5,7 +5,7 @@
 swangular
 ======
 
-An AngularJS wrapper for SweetAlert2 with some added functionality like binding to scope/controller, using html templates...
+An AngularJS wrapper for [SweetAlert2](https://github.com/limonte/sweetalert2) with some added functionality like binding to scope/controller, using html templates...
 
 Getting Started
 -------
