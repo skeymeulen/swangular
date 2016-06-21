@@ -124,9 +124,9 @@ angular.module('swangular', [])
 
             var deferred = $q.defer();
 
-            if(options.templateHtml) {
+            if(options.htmlTemplate) {
 
-                _getTemplate(options.templateHtml).then(function(htmlTemplate) {
+                _getTemplate(options.htmlTemplate).then(function(htmlTemplate) {
                     deferred.resolve(htmlTemplate)
                 })
 
