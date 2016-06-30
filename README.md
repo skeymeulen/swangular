@@ -1,6 +1,6 @@
 [![github tag](https://img.shields.io/github/tag/skeymeulen/swangular.svg?style=flat-square)](https://github.com/skeymeulen/swangular/tags)
-[![Latest Stable Version](https://img.shields.io/bower/v/ng-sweet-alert.svg?style=flat-square)](http://bower.io/search/?q=ng-sweet-alert)
-[![Latest Stable Version](https://img.shields.io/npm/v/ng-sweet-alert.svg?style=flat-square)](https://www.npmjs.com/package/ng-sweet-alert)
+[![Latest Stable Version](https://img.shields.io/bower/v/swangular.svg?style=flat-square)](http://bower.io/search/?q=swangular)
+[![Latest Stable Version](https://img.shields.io/npm/v/swangular.svg?style=flat-square)](https://www.npmjs.com/package/swangular)
 
 swangular
 ======
