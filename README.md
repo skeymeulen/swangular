@@ -97,7 +97,7 @@ Will open a SweetAlert2 alert with some Angular sugar on top. You can still use 
 ```javascript
 swangular.open({
         title: "New user",
-        templateHtml: "/components/new-user/new_user.html",
+        htmlTemplate: "/components/new-user/new_user.html",
         showCancelButton: true,
         preConfirm: "submit",
         showLoaderOnConfirm: true,
