@@ -7,7 +7,7 @@
     }
 
 angular.module('swangular', [])
-    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', '$controller', function($compile, $http, $rootScope, $q, $controller) {
+    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', '$controller', '$injector', function($compile, $http, $rootScope, $q, $controller, $injector) {
 
         /*
          *
