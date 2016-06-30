@@ -7,7 +7,7 @@
     }
 
 angular.module('swangular', [])
-    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', function($compile, $http, $rootScope, $q) {
+    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', '$controller', function($compile, $http, $rootScope, $q, $controller) {
 
         /*
          *
@@ -80,19 +80,46 @@ angular.module('swangular', [])
          */
         function swal_open(options){
 
-            return _getHtml(options).then(function(html){
+            var resolve = angular.extend({}, options.resolve);
+
+            angular.forEach(resolve, function (value, key) {
+                resolve[key] = angular.isString(value) ? $injector.get(value) : $injector.invoke(value, null, null, key);
+            });
+
+            return $q.all({
+                html: _getHtml(options),
+                locals: $q.all(resolve)
+            }).then(function(setup){
+
+                var html = setup.html,
+                    locals = setup.locals;
+                
                 if(options.scope) {
 
                     options.html = $compile(html)(options.scope);
 
                 } else if(options.controller){
+                    
+                    var controllerAs,
+                        scope = $rootScope.$new();
 
-                    var scope = $rootScope.$new();
-                    var compiledElement = $compile(_wrapHtmlInController(options, html))(scope);
+                    if (options.controllerAs && angular.isString(options.controllerAs)) {
+                        controllerAs = options.controllerAs;
+                    }
+
+                    var controllerInstance = $controller(options.controller, angular.extend(
+                        locals,
+                        {
+                            $scope: scope
+                        }), true, controllerAs);
+
+                    var $content = angular.element(html);
+                    $content.data('$ngControllerController', controllerInstance());
+
+                    var compiledElement = $compile($content)(scope);
                     
                     if(typeof options.preConfirm === 'string'){
                         
-                        var controllerInstance = compiledElement.controller();
                         options.preConfirm = controllerInstance[options.preConfirm];
                     }
 
@@ -122,6 +149,25 @@ angular.module('swangular', [])
 
         function _getHtml(options){
 
+            if(options.htmlTemplate) {
+                return _getTemplate(options.htmlTemplate)
+            } else {
+               return options.html;
+            }
+
+        }
+
+        function _getTemplate(tmpl) {
+            return $http.get(tmpl).then(function(res) {
+                return res.data || '';
+            });
+        }
+
+
+        /*
+
+        function _getHtml(options){
+
             var deferred = $q.defer();
 
             if(options.htmlTemplate) {
@@ -144,6 +190,7 @@ angular.module('swangular', [])
                 return res.data || '';
             });
         }
+        */
 
         /*
          *
