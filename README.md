@@ -102,7 +102,16 @@ swangular.open({
         preConfirm: "submit",
         showLoaderOnConfirm: true,
         controller: 'NewUserCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+            injectedValue: function() {
+                return "What a time to be alive!";
+            }
+        }
+    });
+    
+app.controller('NewUserCtrl', function (injectValue) {
+        console.log(injectedValue) // What a time to be alive!
     });
 ```
 
@@ -118,7 +127,7 @@ All the options below are unique to Swangular or have added functionality compar
 | controller       | `string`| Any passed html will be compiled and bound to this controller. If `scope` is present, it will use that and `controller` will be ignored.  
 | controllerAs     | `string`| If you use controllerAs syntax in your markup, you can pass the correct string here.
 | preConfirm       | `string` or `function()`| When a function, it will behave just like in SweetAlert2. When a string is passed, it will use this string to look for a function on the passed `controller`. You have to make sure there is a function with the specified name on that controller.
-
+| resolve       | `Object.<String, Function>`| Dependencies to be injected into the controller. If one or more of the depencies are promises, swangular will wait untill these are resolved/rejected before instantiating the controller.
 
 
 
