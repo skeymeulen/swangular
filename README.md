@@ -108,11 +108,11 @@ swangular.open({
                 return "What a time to be alive!";
             }
         }
-    });
+});
     
-app.controller('NewUserCtrl', function (injectValue) {
+app.controller('NewUserCtrl', function (injectedValue) {
         console.log(injectedValue) // What a time to be alive!
-    });
+});
 ```
 
 #### Options:
