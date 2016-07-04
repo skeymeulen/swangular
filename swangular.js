@@ -120,7 +120,7 @@ angular.module('swangular', [])
                     
                     if(typeof options.preConfirm === 'string'){
                         
-                        options.preConfirm = controllerInstance[options.preConfirm];
+                        options.preConfirm = compiledElement.controller()[options.preConfirm];
                     }
 
                     options.html = compiledElement;
