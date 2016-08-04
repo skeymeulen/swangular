@@ -127,6 +127,13 @@ angular.module('swangular', [])
 
                 }
 
+                // Clean options object before passing it to SweetAlert2
+                delete options.htmlTemplate;
+                delete options.controller;
+                delete options.controllerAs;
+                delete options.resolve;
+                delete options.scope;
+
                 return swal(options);
 
             });
