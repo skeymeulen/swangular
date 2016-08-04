@@ -222,7 +222,64 @@ angular.module('swangular', [])
                 return swal(arg1, arg2, arg3);
             }
         }
-        
+
+        /*
+         * SweetAlert2 Global Methods
+         */
+
+        function close() {
+            $rootScope.$evalAsync(function(){
+                swal.close();
+            });
+        }
+
+        function disableButtons() {
+            $rootScope.$evalAsync(function(){
+                swal.disableButtons();
+            });
+        }
+
+        function enableButtons() {
+            $rootScope.$evalAsync(function(){
+                swal.enableButtons();
+            });
+        }
+
+        function disableConfirmButton() {
+            $rootScope.$evalAsync(function(){
+                swal.disableConfirmButton();
+            });
+        }
+
+        function enableConfirmButton() {
+            $rootScope.$evalAsync(function(){
+                swal.enableConfirmButton();
+            });
+        }
+
+        function clickConfirm() {
+            $rootScope.$evalAsync(function(){
+                swal.clickConfirm();
+            });
+        }
+
+        function clickCancel() {
+            $rootScope.$evalAsync(function(){
+                swal.showLoading();
+            });
+        }
+
+        function showLoading() {
+            $rootScope.$evalAsync(function(){
+                swal.clickCancel();
+            });
+        }
+
+        function hideLoading() {
+            $rootScope.$evalAsync(function(){
+                swal.hideLoading();
+            });
+        }
 
         return {
             alert: swal_alert,
@@ -230,7 +287,19 @@ angular.module('swangular', [])
             info: swal_info,
             success: swal_success,
             open: swal_open,
-            swal: swal_base
+            swal: swal_base,
+            closeModal: close,
+            close: close,
+            disableButtons: disableButtons,
+            enableButtons: enableButtons,
+            disableConfirmButton: disableConfirmButton,
+            enableConfirmButton: enableConfirmButton,
+            clickConfirm: clickConfirm,
+            clickCancel: clickCancel,
+            showLoading: showLoading,
+            enableLoading: showLoading,
+            hideLoading: hideLoading,
+            disableLoading: hideLoading
         }
 
     }]);
