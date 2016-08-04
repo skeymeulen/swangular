@@ -129,7 +129,19 @@ All the options below are unique to Swangular or have added functionality compar
 | preConfirm       | `string` or `function()`| When a function, it will behave just like in SweetAlert2. When a string is passed, it will use this string to look for a function on the passed `controller`. You have to make sure there is a function with the specified name on that controller.
 | resolve       | `Object.<String, Function>`| Dependencies to be injected into the controller. If one or more of the depencies are promises, swangular will wait untill these are resolved/rejected before instantiating the controller.
 
+Methods
+-------
 
-
-
-
+The following methods are also accessible:
+* ``swangular.close()``
+* ``swangular.closeModal()``
+* ``swangular.enableButtons()``
+* ``swangular.disableButtons()``
+* ``swangular.enableConfirmButton()``
+* ``swangular.disableConfirmButton()``
+* ``swangular.showLoading()``
+* ``swangular.enableLoading()``
+* ``swangular.hideLoading()``
+* ``swangular.disableLoading()``
+* ``swangular.clickConfirm()``
+* ``swangular.clickCancel()``
