@@ -91,50 +91,47 @@ angular.module('swangular', [])
                 locals: $q.all(resolve)
             }).then(function(setup){
 
-                var html = setup.html,
-                    locals = setup.locals;
-                
-                if(options.scope) {
+                var scope = options.scope,
+                    controller = options.controller,
+                    controllerAsOption = options.controllerAs,
+                    preConfirm = options.preConfirm;
 
-                    options.html = $compile(html)(options.scope);
-
-                } else if(options.controller){
-                    
-                    var controllerAs,
-                        scope = $rootScope.$new();
-
-                    if (options.controllerAs && angular.isString(options.controllerAs)) {
-                        controllerAs = options.controllerAs;
-                    }
-
-                    var controllerInstance = $controller(options.controller, angular.extend(
-                        locals,
-                        {
-                            $scope: scope
-                        }), true, controllerAs);
-
-                    var $content = angular.element(html);
-                    $content.data('$ngControllerController', controllerInstance());
-
-                    var compiledElement = $compile($content)(scope);
-                    
-                    if(typeof options.preConfirm === 'string'){
-                        
-                        options.preConfirm = compiledElement.controller()[options.preConfirm];
-                    }
-
-                    options.html = compiledElement;
-
-                }
-
-                // Clean options object before passing it to SweetAlert2
+                delete options.html;
                 delete options.htmlTemplate;
-                delete options.controller;
-                delete options.controllerAs;
                 delete options.resolve;
                 delete options.scope;
+                delete options.controller;
+                delete options.controllerAs;
+                delete options.preConfirm;
 
-                return swal(options);
+                var locals = setup.locals;
+
+                options.html = setup.html;
+
+                if (controller){
+                  var controllerAs;
+                  scope = $rootScope.$new();
+
+                  if (controllerAsOption && angular.isString(controllerAsOption)) {
+                      controllerAs = controllerAsOption;
+                  }
+
+                  var controllerInstance = $controller(controller, angular.extend(
+                      locals,
+                      {
+                          $scope: scope
+                      }), true, controllerAs);
+
+                      if(typeof preConfirm === 'string'){
+                          options.preConfirm = controllerInstance()[preConfirm];
+                      }
+                }
+                var prom = swal(options);
+                var html = document.getElementsByClassName('swal2-modal')[0];
+
+                $compile(html)(scope);
+
+                return prom;
 
             });
 
