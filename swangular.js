@@ -139,20 +139,6 @@ angular.module('swangular', [])
 
         }
 
-        function _wrapHtmlInController(options, html){
-
-            var controllerString = 'ng-controller="' + options.controller;
-
-            if(options.controllerAs){
-
-                controllerString = controllerString.concat(' as ' + options.controllerAs);
-
-            }
-
-            return '<div ' + controllerString + '">' + html + '</div>';
-
-        }
-
         function _getHtml(options){
 
             if(options.htmlTemplate) {
