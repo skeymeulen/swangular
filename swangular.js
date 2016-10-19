@@ -120,11 +120,13 @@ angular.module('swangular', [])
                       locals,
                       {
                           $scope: scope
-                      }), true, controllerAs);
+                      }), false, controllerAs);
 
-                      if(typeof preConfirm === 'string'){
-                          options.preConfirm = controllerInstance()[preConfirm];
-                      }
+                  if (typeof preConfirm === 'string'){
+                      options.preConfirm = controllerInstance[preConfirm];
+                  } else if (typeof preConfirm === 'function'){
+                      options.preConfirm = preConfirm;
+                  }
                 }
                 var prom = swal(options);
                 var html = document.getElementsByClassName('swal2-modal')[0];
@@ -134,20 +136,6 @@ angular.module('swangular', [])
                 return prom;
 
             });
-
-        }
-
-        function _wrapHtmlInController(options, html){
-
-            var controllerString = 'ng-controller="' + options.controller;
-
-            if(options.controllerAs){
-
-                controllerString = controllerString.concat(' as ' + options.controllerAs);
-
-            }
-
-            return '<div ' + controllerString + '">' + html + '</div>';
 
         }
 
