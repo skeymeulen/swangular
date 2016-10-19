@@ -120,7 +120,7 @@ angular.module('swangular', [])
                       locals,
                       {
                           $scope: scope
-                      }), true, controllerAs)();
+                      }), false, controllerAs);
 
                   if (typeof preConfirm === 'string'){
                       options.preConfirm = controllerInstance[preConfirm];
