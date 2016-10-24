@@ -1,6 +1,7 @@
 [![github tag](https://img.shields.io/github/tag/skeymeulen/swangular.svg?style=flat-square)](https://github.com/skeymeulen/swangular/tags)
 [![Latest Stable Version](https://img.shields.io/bower/v/swangular.svg?style=flat-square)](http://bower.io/search/?q=swangular)
 [![Latest Stable Version](https://img.shields.io/npm/v/swangular.svg?style=flat-square)](https://www.npmjs.com/package/swangular)
+[![Build Status](https://travis-ci.org/skeymeulen/swangular.svg?branch=master)](https://travis-ci.org/skeymeulen/swangular)
 
 swangular
 ======
