@@ -123,9 +123,9 @@ angular.module('swangular', [])
                       }), false, controllerAs);
 
                   if (typeof preConfirm === 'string'){
-                      options.preConfirm = controllerInstance[preConfirm];
+                      options.preConfirm = function() { return scope.$apply(controllerInstance[preConfirm]) };
                   } else if (typeof preConfirm === 'function'){
-                      options.preConfirm = preConfirm;
+                      options.preConfirm = function() { return scope.$apply(preConfirm) };
                   }
                 }
                 var prom = swal(options);
@@ -154,35 +154,6 @@ angular.module('swangular', [])
                 return res.data || '';
             });
         }
-
-
-        /*
-
-        function _getHtml(options){
-
-            var deferred = $q.defer();
-
-            if(options.htmlTemplate) {
-
-                _getTemplate(options.htmlTemplate).then(function(htmlTemplate) {
-                    deferred.resolve(htmlTemplate)
-                })
-
-            } else {
-                deferred.resolve(options.html);
-            }
-
-            return deferred.promise;
-
-        }
-
-        function _getTemplate(tmpl) {
-            return $http.get(tmpl).then(function(res) {
-                //console.log(res.data);
-                return res.data || '';
-            });
-        }
-        */
 
         /*
          *
