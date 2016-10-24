@@ -4,7 +4,7 @@
   "description": "An AngularJS wrapper for Sweet Alert 2",
   "main": "swangular.js",
   "scripts": {
-    "test": "webdriver-manager start && gulp test"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
