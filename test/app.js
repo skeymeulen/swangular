@@ -5,6 +5,14 @@ app.controller('AppCtrl', ['$scope', 'swangular', function ($scope, swangular) {
     var vm = this;
 
     vm.test = "This string was injected from controller";
+    vm.preConfirmContent = "Default";
+
+    vm.preConfirm = function () {
+        return new Promise(function(resolve) {
+            vm.preConfirmContent = "This string was inject by preConfirm";
+            resolve();
+        })
+    };
 
     vm.openModal1 = function () {
         swangular.swal("Title", "Content");
@@ -52,6 +60,28 @@ app.controller('AppCtrl', ['$scope', 'swangular', function ($scope, swangular) {
         })
     };
 
+    vm.openModal6 = function () {
+
+        swangular.open({
+            title: "Pre-confirm test",
+            htmlTemplate: "template2.html",
+            controller: 'ModalCtrl',
+            controllerAs: 'vm',
+            preConfirm: vm.preConfirm
+        })
+    };
+
+    vm.openModal7 = function () {
+
+        swangular.open({
+            title: "Pre-confirm test",
+            htmlTemplate: "template2.html",
+            controller: 'ModalCtrl',
+            controllerAs: 'vm',
+            preConfirm: "preConfirm"
+        })
+    };
+
 }]);
 
 app.controller('ModalCtrl', function () {
@@ -59,6 +89,14 @@ app.controller('ModalCtrl', function () {
     var vm = this;
 
     vm.content = "This string was injected from modalcontroller";
+    vm.modalPreConfirmContent = "";
+
+    vm.preConfirm = function () {
+        return new Promise(function(resolve) {
+            vm.modalPreConfirmContent = "This string was inject by preConfirm";
+            resolve();
+        })
+    }
     
 });
 
