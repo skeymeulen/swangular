@@ -1,6 +1,6 @@
 {
   "name": "swangular",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "An AngularJS wrapper for Sweet Alert 2",
   "main": "swangular.js",
   "scripts": {
