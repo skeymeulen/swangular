@@ -12,6 +12,7 @@ if (process.env.TRAVIS) {
         'build': process.env.TRAVIS_BUILD_NUMBER
     };
 } else {
+    //command to execute locally: webdriver-manager start (https://www.npmjs.com/package/webdriver-manager)
     config.seleniumAddress = 'http://localhost:4444/wd/hub';
 }
 

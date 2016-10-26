@@ -83,5 +83,18 @@ describe('swangular', function () {
 
     });
 
+    it('executes a preConfirm method on when no controller is passed', function () {
+
+        // Open modal
+        element(by.id('btn8')).click();
+
+        // Click confirm button
+        $('.swal2-confirm').click();
+
+        // Check if preconfirm is executed
+        expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was inject by preConfirm');
+
+    });
+
 
 });

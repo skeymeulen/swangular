@@ -82,6 +82,19 @@ app.controller('AppCtrl', ['$scope', 'swangular', function ($scope, swangular) {
         })
     };
 
+    vm.openModal8 = function () {
+
+        $scope.content = 'This string was injected from scope';
+
+        swangular.open({
+            title: "Pre-confirm no controoler",
+            preConfirm: vm.preConfirm,
+            htmlTemplate: '/components/network-container/newServerNetworks/new_server_networks.html',
+            scope: $scope
+        })
+    };
+
+
 }]);
 
 app.controller('ModalCtrl', function () {

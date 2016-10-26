@@ -124,10 +124,13 @@ angular.module('swangular', [])
 
                   if (typeof preConfirm === 'string'){
                       options.preConfirm = function() { return scope.$apply(controllerInstance[preConfirm]) };
-                  } else if (typeof preConfirm === 'function'){
-                      options.preConfirm = function() { return scope.$apply(preConfirm) };
                   }
                 }
+
+                if (typeof preConfirm === 'function'){
+                    options.preConfirm = function() { return scope.$apply(preConfirm) };
+                }
+                
                 var prom = swal(options);
                 var html = document.getElementsByClassName('swal2-modal')[0];
 
