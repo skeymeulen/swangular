@@ -9,7 +9,7 @@ app.controller('AppCtrl', ['$scope', 'swangular', function ($scope, swangular) {
 
     vm.preConfirm = function () {
         return new Promise(function(resolve) {
-            vm.preConfirmContent = "This string was inject by preConfirm";
+            vm.preConfirmContent = "This string was injected by preConfirm";
             resolve();
         })
     };
@@ -87,13 +87,12 @@ app.controller('AppCtrl', ['$scope', 'swangular', function ($scope, swangular) {
         $scope.content = 'This string was injected from scope';
 
         swangular.open({
-            title: "Pre-confirm no controoler",
+            title: "Pre-confirm no controller",
             preConfirm: vm.preConfirm,
             htmlTemplate: '/components/network-container/newServerNetworks/new_server_networks.html',
             scope: $scope
         })
     };
-
 
 }]);
 
@@ -106,7 +105,7 @@ app.controller('ModalCtrl', function () {
 
     vm.preConfirm = function () {
         return new Promise(function(resolve) {
-            vm.modalPreConfirmContent = "This string was inject by preConfirm";
+            vm.modalPreConfirmContent = "This string was injected by preConfirm";
             resolve();
         })
     }
@@ -118,5 +117,24 @@ app.controller('ResolveCtrl', [ 'resolve', function (resolve) {
     var vm = this;
 
     vm.content = resolve.content;
+
+}]);
+
+app.controller('ParentCtrl', ['$scope', 'swangular', function ($scope, swangular) {
+
+    var vm = this;
+
+    vm.content = "This string was injected from parent controller";
+
+    vm.openModal9 = function () {
+
+        swangular.open({
+            title: "ParentCtrl Modal",
+            htmlTemplate: 'template4.html',
+            controller: 'ModalCtrl',
+            controllerAs: 'child',
+            scope: $scope
+        })
+    };
 
 }]);

@@ -66,7 +66,7 @@ describe('swangular', function () {
         $('.swal2-confirm').click();
 
         // Check if preconfirm is executed
-        expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was inject by preConfirm');
+        expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
 
     });
 
@@ -79,7 +79,7 @@ describe('swangular', function () {
         $('.swal2-confirm').click();
 
         // Check if preconfirm is executed
-        expect(element(by.binding('vm.modalPreConfirmContent')).getText()).toEqual('This string was inject by preConfirm');
+        expect(element(by.binding('vm.modalPreConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
 
     });
 
@@ -92,7 +92,18 @@ describe('swangular', function () {
         $('.swal2-confirm').click();
 
         // Check if preconfirm is executed
-        expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was inject by preConfirm');
+        expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
+
+    });
+
+    it('can access a parent controller using the controllerAs syntax', function () {
+
+        // Open modal
+        element(by.id('btn9')).click();
+
+        // Check if preconfirm is executed
+        expect(element(by.binding('child.content')).getText()).toEqual('This string was injected from modalcontroller');
+        expect(element(by.binding('parent.content')).getText()).toEqual('This string was injected from parent controller');
 
     });
 

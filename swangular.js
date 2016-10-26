@@ -109,8 +109,10 @@ angular.module('swangular', [])
                 options.html = setup.html;
 
                 if (controller){
+
                   var controllerAs;
-                  scope = $rootScope.$new();
+                    scope = scope ? scope.$new() : $rootScope.$new();
+
 
                   if (controllerAsOption && angular.isString(controllerAsOption)) {
                       controllerAs = controllerAsOption;
