@@ -7,7 +7,8 @@
     }
 
 angular.module('swangular', [])
-    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', '$controller', '$injector', function($compile, $http, $rootScope, $q, $controller, $injector) {
+    .factory('swangular', ['$compile', '$http', '$rootScope', '$q', '$controller', '$injector', '$templateCache',
+        function($compile, $http, $rootScope, $q, $controller, $injector, $templateCache) {
 
         /*
          *
@@ -155,7 +156,7 @@ angular.module('swangular', [])
         }
 
         function _getTemplate(tmpl) {
-            return $http.get(tmpl).then(function(res) {
+            return $http.get(tmpl, {cache: $templateCache}).then(function(res) {
                 return res.data || '';
             });
         }
