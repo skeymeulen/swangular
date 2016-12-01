@@ -62,7 +62,8 @@ angular.module('swangular', [])
             var options = angular.extend({
                 title: "Alert",
                 text: message,
-                type: "warning"
+                type: "warning",
+                showCancelButton: true
             }, customOptions);
 
             return swal(options);
