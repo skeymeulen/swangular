@@ -146,3 +146,16 @@ The following methods are also accessible:
 * ``swangular.disableLoading()``
 * ``swangular.clickConfirm()``
 * ``swangular.clickCancel()``
+
+Provider
+-------
+
+During config phase you can inject the `swangularProvider` to set default configuration options.
+```javascript    
+app.config(function (swangularProvider) {
+    swangularProvider.setDefaults({
+        animation: false,
+        reverseButtons: true
+    });
+});
+```
