@@ -243,6 +243,12 @@ angular.module('swangular', [])
             });
         }
 
+        function setDefaults(options) {
+            $rootScope.$evalAsync(function(){
+                swal.setDefaults(options);
+            });
+        }
+
         return {
             alert: swal_alert,
             confirm: swal_confirm,
@@ -261,7 +267,8 @@ angular.module('swangular', [])
             showLoading: showLoading,
             enableLoading: showLoading,
             hideLoading: hideLoading,
-            disableLoading: hideLoading
+            disableLoading: hideLoading,
+            setDefaults: setDefaults
         }
 
     }]);
