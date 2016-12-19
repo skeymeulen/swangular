@@ -147,6 +147,17 @@
                         var prom = swal(options);
                         var html = document.getElementsByClassName('swal2-modal')[0];
 
+                        // If there is a form, trigger the button on press of enter button
+                        var form = html.getElementsByTagName('form');
+                        if(form[0]) {
+                            form[0].onkeyup = function(event) {
+                                event.stopPropagation();
+                                if (event.keyCode === 13) {
+                                    html.querySelector('.swal2-confirm').click();
+                                }
+                            };
+                        }
+
                         $compile(html)(scope);
 
                         return prom;
