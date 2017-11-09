@@ -13,7 +13,7 @@ gulp.task('connect', function () {
 });
 
 gulp.task('test', ['connect'], function(done) {
-    var args = ['--baseUrl', 'http://127.0.0.1:8888'];
+    var args = ['--baseUrl', 'http://127.0.0.1:8899'];
     gulp.src(["./spec.js"])
         .pipe(protractor({
             configFile: "protractor.conf.js",
