@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 gulp.task('connect', function () {
     connect.server({
         root: ['./', 'test/', 'node_modules/'],
-        port: 8888,
+        port: 8899,
         fallback: './test/testfixture.html'
     });
 });
