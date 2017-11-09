@@ -119,11 +119,28 @@
 
                         options.html = setup.html;
 
+                        scope = scope ? scope.$new() : $rootScope.$new();
+
+                        function transform(func){
+                            return function(){
+                                return func().then(function (result){
+                                    return {resolved: true, value: result};
+                                },function(reason){
+                                    return {resolved: false, value: reason};
+                                });
+                            };
+                        }
+
+                        function transformBack(result){
+                            if (result.resolved) {
+                                return result.value;
+                            }
+                            return Promise.reject(result.value);
+                        }
+
                         if (controller){
 
                             var controllerAs;
-                            scope = scope ? scope.$new() : $rootScope.$new();
-
 
                             if (controllerAsOption && angular.isString(controllerAsOption)) {
                                 controllerAs = controllerAsOption;
@@ -136,15 +153,20 @@
                                 }), false, controllerAs);
 
                             if (typeof preConfirm === 'string'){
-                                options.preConfirm = function() { return scope.$apply(controllerInstance[preConfirm]) };
+                                options.preConfirm = function(){
+                                    return scope.$apply(transform(controllerInstance[preConfirm])).then(transformBack);
+                                };
                             }
+
                         }
 
                         if (typeof preConfirm === 'function'){
-                            options.preConfirm = function() { return scope.$apply(preConfirm) };
+                            options.preConfirm = function(){
+                                return scope.$apply(transform(preConfirm)).then(transformBack)
+                            };
                         }
 
-                        var prom = swal(options);
+                        var prom = $q.when(swal(options));
                         var html = document.getElementsByClassName('swal2-modal')[0];
 
                         // If there is a form, trigger the button on press of enter button
