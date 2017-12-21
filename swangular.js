@@ -268,13 +268,13 @@
                     });
                 }
 
-                function clickCancel() {
+                function showLoading() {
                     $rootScope.$evalAsync(function(){
                         swal.showLoading();
                     });
                 }
 
-                function showLoading() {
+                function clickCancel() {
                     $rootScope.$evalAsync(function(){
                         swal.clickCancel();
                     });
