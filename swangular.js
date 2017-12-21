@@ -37,7 +37,7 @@
                         showCancelButton: false
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -50,7 +50,7 @@
                         showCancelButton: false
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -63,7 +63,7 @@
                         showCancelButton: false
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -75,7 +75,7 @@
                         type: "warning"
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -219,13 +219,14 @@
 
                     // In case of options
                     if(arg1 !== null && typeof arg1 === 'object') {
-                        return swal(arg1)
+                        return $q.when(swal(arg1));
                     }
 
                     // In case of: title, text, type
                     else {
-                        return swal(arg1, arg2, arg3);
+                        return $q.when(swal(arg1, arg2, arg3));
                     }
+
                 }
 
                 /*
