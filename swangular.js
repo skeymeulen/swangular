@@ -121,23 +121,6 @@
 
                         scope = scope ? scope.$new() : $rootScope.$new();
 
-                        function transform(func){
-                            return function(){
-                                return func().then(function (result){
-                                    return {resolved: true, value: result};
-                                },function(reason){
-                                    return {resolved: false, value: reason};
-                                });
-                            };
-                        }
-
-                        function transformBack(result){
-                            if (result.resolved) {
-                                return result.value;
-                            }
-                            return Promise.reject(result.value);
-                        }
-
                         if (controller){
 
                             var controllerAs;
@@ -153,17 +136,13 @@
                                 }), false, controllerAs);
 
                             if (typeof preConfirm === 'string'){
-                                options.preConfirm = function(){
-                                    return scope.$apply(transform(controllerInstance[preConfirm])).then(transformBack);
-                                };
+                                options.preConfirm = function() { return scope.$apply(controllerInstance[preConfirm]) };
                             }
 
                         }
 
                         if (typeof preConfirm === 'function'){
-                            options.preConfirm = function(){
-                                return scope.$apply(transform(preConfirm)).then(transformBack)
-                            };
+                            options.preConfirm = function() { return scope.$apply(preConfirm) };
                         }
 
                         var prom = $q.when(swal(options));

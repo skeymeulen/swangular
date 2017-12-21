@@ -16,7 +16,7 @@ describe('swangular', function () {
 
         element(by.id('btn1')).click();
 
-        var title = $('.swal2-modal > h2').getText();
+        var title = $('.swal2-contentwrapper > .swal2-title').getText();
         var content = $('.swal2-content').getText();
 
         expect(title).toEqual('Title');
@@ -28,7 +28,7 @@ describe('swangular', function () {
 
         element(by.id('btn2')).click();
 
-        expect($('.swal2-modal > h2').getText()).toEqual('Template test');
+        expect($('.swal2-contentwrapper > .swal2-title').getText()).toEqual('Template test');
         expect(element(by.id('basictemplate')).getText()).toEqual('Basic template');
 
     });
