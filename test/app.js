@@ -93,7 +93,7 @@ app.controller('AppCtrl', ['$scope', '$q', '$timeout', 'swangular', function ($s
 
 }]);
 
-app.controller('ModalCtrl', ['$q', function ($q) {
+app.controller('ModalCtrl', ['$q','$timeout', function ($q, $timeout) {
 
     var vm = this;
 
@@ -103,7 +103,9 @@ app.controller('ModalCtrl', ['$q', function ($q) {
     vm.preConfirm = function () {
         return new $q(function(resolve, reject) {
             vm.modalPreConfirmContent = "This string was injected by preConfirm";
-            resolve();
+            $timeout(function () {
+                resolve();
+            }, 0);
         });
     };
     
