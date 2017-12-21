@@ -1,6 +1,6 @@
 var app = angular.module('swangularApp', ['swangular']);
 
-app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, swangular) {
+app.controller('AppCtrl', ['$scope', '$q', '$timeout', 'swangular', function ($scope, $q, $timeout, swangular) {
 
     var vm = this;
 
@@ -10,7 +10,9 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
     vm.preConfirm = function () {
         return new $q(function(resolve, reject) {
             vm.preConfirmContent = "This string was injected by preConfirm";
-            resolve();
+            $timeout(function () {
+                resolve();
+            }, 0);
         })
     };
 
