@@ -86,7 +86,7 @@ app.controller('AppCtrl', ['$scope', '$q', '$timeout', 'swangular', function ($s
         swangular.open({
             title: "Pre-confirm no controller",
             preConfirm: vm.preConfirm,
-            htmlTemplate: '/components/network-container/newServerNetworks/new_server_networks.html',
+            htmlTemplate: 'template2.html',
             scope: $scope
         });
     };
@@ -105,7 +105,7 @@ app.controller('ModalCtrl', ['$q','$timeout', function ($q, $timeout) {
             vm.modalPreConfirmContent = "This string was injected by preConfirm";
             $timeout(function () {
                 resolve();
-            }, 100);
+            }, 1000);
         });
     };
     
