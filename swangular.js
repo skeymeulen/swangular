@@ -37,7 +37,7 @@
                         showCancelButton: false
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -50,7 +50,7 @@
                         showCancelButton: false
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -63,7 +63,7 @@
                         showCancelButton: false
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -75,7 +75,7 @@
                         type: "warning"
                     }, customOptions);
 
-                    return swal(options);
+                    return $q.when(swal(options));
 
                 }
 
@@ -121,23 +121,6 @@
 
                         scope = scope ? scope.$new() : $rootScope.$new();
 
-                        function transform(func){
-                            return function(){
-                                return func().then(function (result){
-                                    return {resolved: true, value: result};
-                                },function(reason){
-                                    return {resolved: false, value: reason};
-                                });
-                            };
-                        }
-
-                        function transformBack(result){
-                            if (result.resolved) {
-                                return result.value;
-                            }
-                            return Promise.reject(result.value);
-                        }
-
                         if (controller){
 
                             var controllerAs;
@@ -153,17 +136,13 @@
                                 }), false, controllerAs);
 
                             if (typeof preConfirm === 'string'){
-                                options.preConfirm = function(){
-                                    return scope.$apply(transform(controllerInstance[preConfirm])).then(transformBack);
-                                };
+                                options.preConfirm = function() { return scope.$apply(controllerInstance[preConfirm]) };
                             }
 
                         }
 
                         if (typeof preConfirm === 'function'){
-                            options.preConfirm = function(){
-                                return scope.$apply(transform(preConfirm)).then(transformBack)
-                            };
+                            options.preConfirm = function() { return scope.$apply(preConfirm) };
                         }
 
                         var prom = $q.when(swal(options));
@@ -219,13 +198,14 @@
 
                     // In case of options
                     if(arg1 !== null && typeof arg1 === 'object') {
-                        return swal(arg1)
+                        return $q.when(swal(arg1));
                     }
 
                     // In case of: title, text, type
                     else {
-                        return swal(arg1, arg2, arg3);
+                        return $q.when(swal(arg1, arg2, arg3));
                     }
+
                 }
 
                 /*
@@ -268,13 +248,13 @@
                     });
                 }
 
-                function clickCancel() {
+                function showLoading() {
                     $rootScope.$evalAsync(function(){
                         swal.showLoading();
                     });
                 }
 
-                function showLoading() {
+                function clickCancel() {
                     $rootScope.$evalAsync(function(){
                         swal.clickCancel();
                     });

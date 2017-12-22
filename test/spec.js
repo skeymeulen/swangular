@@ -16,7 +16,7 @@ describe('swangular', function () {
 
         element(by.id('btn1')).click();
 
-        var title = $('.swal2-modal > h2').getText();
+        var title = $('.swal2-contentwrapper > .swal2-title').getText();
         var content = $('.swal2-content').getText();
 
         expect(title).toEqual('Title');
@@ -28,7 +28,7 @@ describe('swangular', function () {
 
         element(by.id('btn2')).click();
 
-        expect($('.swal2-modal > h2').getText()).toEqual('Template test');
+        expect($('.swal2-contentwrapper > .swal2-title').getText()).toEqual('Template test');
         expect(element(by.id('basictemplate')).getText()).toEqual('Basic template');
 
     });
@@ -63,7 +63,7 @@ describe('swangular', function () {
         element(by.id('btn6')).click();
 
         // Click confirm button
-        $('.swal2-confirm').click();
+        element(by.css('.swal2-confirm')).click();
 
         // Check if preconfirm is executed
         expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
@@ -76,7 +76,7 @@ describe('swangular', function () {
         element(by.id('btn7')).click();
 
         // Click confirm button
-        $('.swal2-confirm').click();
+        element(by.css('.swal2-confirm')).click();
 
         // Check if preconfirm is executed
         expect(element(by.binding('vm.modalPreConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
@@ -89,7 +89,7 @@ describe('swangular', function () {
         element(by.id('btn8')).click();
 
         // Click confirm button
-        $('.swal2-confirm').click();
+        element(by.css('.swal2-confirm')).click();
 
         // Check if preconfirm is executed
         expect(element(by.binding('vm.preConfirmContent')).getText()).toEqual('This string was injected by preConfirm');

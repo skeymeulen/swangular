@@ -1,6 +1,6 @@
 var app = angular.module('swangularApp', ['swangular']);
 
-app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, swangular) {
+app.controller('AppCtrl', ['$scope', '$q', '$timeout', 'swangular', function ($scope, $q, $timeout, swangular) {
 
     var vm = this;
 
@@ -10,19 +10,21 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
     vm.preConfirm = function () {
         return new $q(function(resolve, reject) {
             vm.preConfirmContent = "This string was injected by preConfirm";
-            resolve();
+            $timeout(function () {
+                resolve();
+            }, 100);
         })
     };
 
     vm.openModal1 = function () {
-        swangular.swal("Title", "Content").catch(angular.noop);
+        swangular.swal("Title", "Content");
     };
 
     vm.openModal2 = function () {
         swangular.open({
             title: "Template test",
             htmlTemplate: "template1.html"
-        }).catch(angular.noop);
+        });
     };
 
     vm.openModal3 = function () {
@@ -31,7 +33,7 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
             htmlTemplate: "template2.html",
             controller: 'ModalCtrl',
             controllerAs: 'vm'
-        }).catch(angular.noop);
+        });
     };
 
     vm.openModal4 = function () {
@@ -41,7 +43,7 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
             title: "Template test",
             htmlTemplate: "template3.html",
             scope: $scope
-        }).catch(angular.noop);
+        });
     };
 
     vm.openModal5 = function () {
@@ -55,7 +57,7 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
                     return { content: 'This is resolved content'}
                 }
             }
-        }).catch(angular.noop);
+        });
     };
 
     vm.openModal6 = function () {
@@ -65,7 +67,7 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
             controller: 'ModalCtrl',
             controllerAs: 'vm',
             preConfirm: vm.preConfirm
-        }).catch(angular.noop);
+        });
     };
 
     vm.openModal7 = function () {
@@ -75,7 +77,7 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
             controller: 'ModalCtrl',
             controllerAs: 'vm',
             preConfirm: "preConfirm"
-        }).catch(angular.noop);
+        });
     };
 
     vm.openModal8 = function () {
@@ -86,12 +88,12 @@ app.controller('AppCtrl', ['$scope', '$q', 'swangular', function ($scope, $q, sw
             preConfirm: vm.preConfirm,
             htmlTemplate: '/components/network-container/newServerNetworks/new_server_networks.html',
             scope: $scope
-        }).catch(angular.noop);
+        });
     };
 
 }]);
 
-app.controller('ModalCtrl', ['$q', function ($q) {
+app.controller('ModalCtrl', ['$q','$timeout', function ($q, $timeout) {
 
     var vm = this;
 
@@ -101,7 +103,9 @@ app.controller('ModalCtrl', ['$q', function ($q) {
     vm.preConfirm = function () {
         return new $q(function(resolve, reject) {
             vm.modalPreConfirmContent = "This string was injected by preConfirm";
-            resolve();
+            $timeout(function () {
+                resolve();
+            }, 100);
         });
     };
     
@@ -128,7 +132,7 @@ app.controller('ParentCtrl', ['$scope', 'swangular', function ($scope, swangular
             controller: 'ModalCtrl',
             controllerAs: 'child',
             scope: $scope
-        }).catch(angular.noop);
+        });
     };
 
 }]);
