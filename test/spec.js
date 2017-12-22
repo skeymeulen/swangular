@@ -78,8 +78,10 @@ describe('swangular', function () {
         // Click confirm button
         element(by.css('.swal2-confirm')).click();
 
+        browser.sleep(500);
+
         // Check if preconfirm is executed
-      expect(element(by.id('modalPreConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
+        expect(element(by.id('modalPreConfirmContent')).getText()).toEqual('This string was injected by preConfirm');
 
     });
 
