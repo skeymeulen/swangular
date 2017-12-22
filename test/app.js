@@ -105,7 +105,7 @@ app.controller('ModalCtrl', ['$q','$timeout', function ($q, $timeout) {
             vm.modalPreConfirmContent = "This string was injected by preConfirm";
             $timeout(function () {
                 resolve();
-            }, 1000);
+            }, 10000);
         });
     };
     
