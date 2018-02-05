@@ -8,12 +8,8 @@ app.controller('AppCtrl', ['$scope', '$q', '$timeout', 'swangular', function ($s
     vm.preConfirmContent = "Default";
 
     vm.preConfirm = function () {
-        return new $q(function(resolve, reject) {
-            vm.preConfirmContent = "This string was injected by preConfirm";
-            $timeout(function () {
-                resolve();
-            }, 100);
-        })
+        vm.preConfirmContent = "This string was injected by preConfirm";
+        return new $q.resolve();
     };
 
     vm.openModal1 = function () {
@@ -101,14 +97,10 @@ app.controller('ModalCtrl', ['$q','$timeout', function ($q, $timeout) {
     vm.modalPreConfirmContent = "";
 
     vm.preConfirm = function () {
-        return new $q(function(resolve, reject) {
-            vm.modalPreConfirmContent = "This string was injected by preConfirm";
-            $timeout(function () {
-                resolve();
-            }, 100);
-        });
+        vm.modalPreConfirmContent = "This string was injected by preConfirm";
+        return new $q.resolve();
     };
-    
+
 }]);
 
 app.controller('ResolveCtrl', [ 'resolve', function (resolve) {
