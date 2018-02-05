@@ -11,14 +11,14 @@
 
             return({
                 setDefaults: setDefaults,
-                $get: ['$compile', '$http', '$rootScope', '$q', '$controller', '$injector', '$templateCache', instantiateSwangular]
+                $get: ['$compile', '$http', '$rootScope', '$q', '$controller', '$injector', '$templateCache', '$timeout', instantiateSwangular]
             });
 
             function setDefaults(options) {
                 swal.setDefaults(options);
             }
 
-            function instantiateSwangular($compile, $http, $rootScope, $q, $controller, $injector, $templateCache) {
+            function instantiateSwangular($compile, $http, $rootScope, $q, $controller, $injector, $templateCache, $timeout) {
 
                 /*
                  *
@@ -136,13 +136,13 @@
                                 }), false, controllerAs);
 
                             if (typeof preConfirm === 'string'){
-                                options.preConfirm = function() { return scope.$apply(controllerInstance[preConfirm]) };
+                                options.preConfirm = function() { return $timeout(controllerInstance[preConfirm]) };
                             }
 
                         }
 
                         if (typeof preConfirm === 'function'){
-                            options.preConfirm = function() { return scope.$apply(preConfirm) };
+                            options.preConfirm = function() { return $timeout(preConfirm) };
                         }
 
                         var prom = $q.when(swal(options));
