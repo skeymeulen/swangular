@@ -7,13 +7,13 @@ var gulp = require('gulp'),
 gulp.task('connect', function () {
     connect.server({
         root: ['./', 'test/', 'node_modules/'],
-        port: 8888,
+        port: 8899,
         fallback: './test/testfixture.html'
     });
 });
 
 gulp.task('test', ['connect'], function(done) {
-    var args = ['--baseUrl', 'http://127.0.0.1:8888'];
+    var args = ['--baseUrl', 'http://127.0.0.1:8899'];
     gulp.src(["./spec.js"])
         .pipe(protractor({
             configFile: "protractor.conf.js",
