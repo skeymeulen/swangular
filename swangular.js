@@ -150,7 +150,7 @@
 
               if (typeof preConfirm === 'string') {
                 options.preConfirm = function() {
-                  return $timeout(controllerInstance[preConfirm]);
+                  return $timeout(controllerInstance[preConfirm].bind(controllerInstance));
                 };
               }
             }
