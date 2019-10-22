@@ -46,7 +46,7 @@
           customOptions
         );
 
-        return $q.when(swal(options));
+        return $q.when(swal.fire(options));
       }
 
       function swal_info(message, customOptions) {
@@ -60,7 +60,7 @@
           customOptions
         );
 
-        return $q.when(swal(options));
+        return $q.when(swal.fire(options));
       }
 
       function swal_success(message, customOptions) {
@@ -74,7 +74,7 @@
           customOptions
         );
 
-        return $q.when(swal(options));
+        return $q.when(swal.fire(options));
       }
 
       function swal_confirm(message, customOptions) {
@@ -87,7 +87,7 @@
           customOptions
         );
 
-        return $q.when(swal(options));
+        return $q.when(swal.fire(options));
       }
 
       /*
@@ -161,7 +161,7 @@
               };
             }
 
-            var prom = $q.when(swal(options));
+            var prom = $q.when(swal.fire(options));
             var html = document.getElementsByClassName('swal2-modal')[0];
 
             // If there is a form, trigger the button on press of enter button
@@ -201,18 +201,18 @@
        * Use this for for a direct mapping to sweetalert,
        * by either passing an options object or by passing up to 3 string arguments
        *
-       * ex. 1: Swangular.swal("Good job!", "You clicked the button!", "success")
+       * ex. 1: Swangular.swal.fire("Good job!", "You clicked the button!", "success")
        *
-       * ex. 2: Swangular.swal({title: "Auto close alert!", text: "I will close in 2 seconds.", timer: 2000});
+       * ex. 2: Swangular.swal.fire({title: "Auto close alert!", text: "I will close in 2 seconds.", timer: 2000});
        *
        */
       function swal_base(arg1, arg2, arg3) {
         // In case of options
         if (arg1 !== null && typeof arg1 === 'object') {
-          return $q.when(swal(arg1));
+          return $q.when(swal.fire(arg1));
         } else {
           // In case of: title, text, type
-          return $q.when(swal(arg1, arg2, arg3));
+          return $q.when(swal.fire(arg1, arg2, arg3));
         }
       }
 
